@@ -1,0 +1,46 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches: [main, claude/papelaria-mestra-build-rx5rk0]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Railway deploy
+    runs-on: ubuntu-latest
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      RAILWAY_SERVICE: ${{ vars.RAILWAY_SERVICE }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Sem o segredo RAILWAY_TOKEN o deploy é ignorado (o job segue verde).
+      - name: Verificar segredo
+        id: guard
+        run: |
+          if [ -z "${RAILWAY_TOKEN}" ]; then
+            echo "RAILWAY_TOKEN não configurado — pulando deploy."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Node
+        if: steps.guard.outputs.enabled == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar Railway CLI
+        if: steps.guard.outputs.enabled == 'true'
+        run: npm i -g @railway/cli
+
+      - name: Deploy
+        if: steps.guard.outputs.enabled == 'true'
+        run: |
+          if [ -n "${RAILWAY_SERVICE}" ]; then
+            railway up --ci --service "${RAILWAY_SERVICE}"
+          else
+            railway up --ci
+          fi

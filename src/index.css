@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Papelaria Mestra — tema Tailwind v4 (paleta pastel de papelaria artesanal)
+--------------------------------------------------------------------------- */
+@theme {
+  --color-paper: #faf6f0;
+  --color-paper-soft: #fcfaf7;
+  --color-primary: #5a5a40;
+  --color-primary-soft: #7a7a5e;
+  --color-secondary: #89a47e;
+  --color-secondary-soft: #a7bd9e;
+  --color-accent: #d97724;
+  --color-accent-soft: #e8964f;
+  --color-ink: #3a3a2e;
+  --color-line: #e6ddd0;
+
+  --font-title: "Playfair Display", serif;
+  --font-display: "Bebas Neue", sans-serif;
+  --font-round: "Baloo 2", cursive;
+  --font-party: "Fredoka", cursive;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar discreta e acolhedora */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary-soft);
+}
+
+/* Utilitário para o padrão de fundo pontilhado do canvas de trabalho */
+.bg-dots {
+  background-image: radial-gradient(var(--color-line) 1px, transparent 1px);
+  background-size: 18px 18px;
+}

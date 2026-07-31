@@ -1,0 +1,13 @@
+{
+  "name": "Papelaria Mestra",
+  "shortName": "Papelaria Mestra",
+  "description": "Plataforma para criar, personalizar, analisar e exportar moldes estruturais (dielines) de papelaria artesanal, embalagens, convites e lembrancinhas, com integração de IA Gemini.",
+  "version": "1.0.0",
+  "themeColor": "#5A5A40",
+  "backgroundColor": "#FAF6F0",
+  "permissions": [
+    "network:gemini",
+    "clipboard-write",
+    "file-download"
+  ]
+}
